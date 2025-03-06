@@ -21,7 +21,7 @@ def main() -> None:
     )
 
     if conn.is_connected():
-        print("Established")
+        print("Connection established")
 
     section_1.all_queries(conn)
     section_2.all_queries(conn)

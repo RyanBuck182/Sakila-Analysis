@@ -91,4 +91,7 @@ if __name__ == "__main__":
         database=constants.DB_NAME
     )
 
+    if db_conn.is_connected():
+        print("Connection established")
+
     all_queries(db_conn)
