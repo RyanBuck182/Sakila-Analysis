@@ -88,12 +88,13 @@ def most_rented_sports_films(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    vis.plot_barh_graph(
+    vis.plot_bar_graph(
         data=data,
-        x_axis='rentalCount',
-        y_axis='title',
+        x_axis='title',
+        y_axis='rentalCount',
         x_label='Rental Count',
         y_label='Film Title',
+        x_ticks_rotation=30,
         title='2.3 Top 5 Most Rented Sports Films - Sakila',
         color_dict=vis.generate_colors(data['title'])
     )

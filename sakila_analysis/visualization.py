@@ -32,9 +32,47 @@ def generate_colors(qualitative_data: list, color_map: str = 'turbo') -> dict:
     return color_dict
 
 
+def plot_bar_graph(
+        data: pd.DataFrame, x_axis: str, y_axis: str,
+        x_label: str, y_label: str,  title: str,
+        x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
+        x_formatter: str | None = None, y_formatter: str | None = None,
+        color_dict: dict | None = None
+) -> None:
+    """Plots a bar graph."""
+    x_axis_data = data[x_axis][::-1]
+    y_axis_data = data[y_axis][::-1]
+
+    # Use color dict if available, otherwise use viridis
+    if color_dict is None:
+        viridis = cm.get_cmap('viridis')
+        colors = viridis(np.linspace(0, 1, len(x_axis_data)))
+    else:
+        colors = []
+        for data_point in x_axis_data:
+            colors.append(color_dict[data_point])
+
+    plt.bar(x_axis_data, y_axis_data, color=colors)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.xticks(rotation=x_ticks_rotation)
+    plt.yticks(rotation=y_ticks_rotation)
+    plt.title(title)
+    plt.tight_layout()
+
+    ax = plt.gca()
+    if x_formatter:
+        ax.xaxis.set_major_formatter(x_formatter)
+    if y_formatter:
+        ax.yaxis.set_major_formatter(y_formatter)
+
+    plt.show()
+
+
 def plot_barh_graph(
         data: pd.DataFrame, x_axis: str, y_axis: str,
         x_label: str, y_label: str, title: str,
+        x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
         x_formatter: str | None = None, y_formatter: str | None = None,
         color_dict: dict | None = None
 ) -> None:
@@ -54,6 +92,8 @@ def plot_barh_graph(
     plt.barh(y_axis_data, x_axis_data, color=colors)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
+    plt.xticks(rotation=x_ticks_rotation)
+    plt.yticks(rotation=y_ticks_rotation)
     plt.title(title)
     plt.tight_layout()
 
