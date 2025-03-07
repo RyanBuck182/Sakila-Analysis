@@ -26,10 +26,10 @@ def FIRST_QUERY_FUNCTION(conn):
     # Visualize data
     # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_barh_graph(
-        x_axis_data=data['placeholderColumnName'],
-        y_axis_data=data['placeholderColumnName'],
-        x_label='Placeholder X Label',
-        y_label='Placeholder Y Label',
+        data=data['placeholderColumnName'],
+        labels=data['placeholderColumnName'],
+        data_label='Placeholder X Label',
+        labels_label='Placeholder Y Label',
         title='X.X Placeholder Title - Sakila',
     )
 
@@ -47,10 +47,10 @@ def SECOND_QUERY_FUNCTION(conn):
     # Visualize data
     # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_barh_graph(
-        x_axis_data=data['placeholderColumnName'],
-        y_axis_data=data['placeholderColumnName'],
-        x_label='Placeholder X Label',
-        y_label='Placeholder Y Label',
+        data=data['placeholderColumnName'],
+        labels=data['placeholderColumnName'],
+        data_label='Placeholder X Label',
+        labels_label='Placeholder Y Label',
         title='X.X Placeholder Title - Sakila',
     )
 
@@ -68,10 +68,10 @@ def THIRD_QUERY_FUNCTION(conn):
     # Visualize data
     # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_barh_graph(
-        x_axis_data=data['placeholderColumnName'],
-        y_axis_data=data['placeholderColumnName'],
-        x_label='Placeholder X Label',
-        y_label='Placeholder Y Label',
+        data=data['placeholderColumnName'],
+        labels=data['placeholderColumnName'],
+        data_label='Placeholder X Label',
+        labels_label='Placeholder Y Label',
         title='X.X Placeholder Title - Sakila',
     )
 
