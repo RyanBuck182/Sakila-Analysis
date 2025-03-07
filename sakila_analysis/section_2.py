@@ -86,10 +86,10 @@ def most_rented_sports_films(conn):
 
     # Visualize data
     vis.plot_bar_graph(
-        x_axis_data=data['title'],
-        y_axis_data=data['rentalCount'],
-        x_label='Rental Count',
-        y_label='Film Title',
+        data=data['rentalCount'],
+        labels=data['title'],
+        data_label='Rental Count',
+        labels_label='Film Title',
         x_ticks_rotation=30,
         title='2.3 Top 5 Most Rented Sports Films - Sakila',
     )

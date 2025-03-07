@@ -45,20 +45,21 @@ def plot_pie_chart(
 
 
 def plot_bar_graph(
-        x_axis_data: list, y_axis_data: list,
-        x_label: str, y_label: str,  title: str,
-        x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
+        data: list, labels: list,
+        data_label: str, labels_label: str,  title: str,
+        x_ticks_rotation: int | str = 'horizontal',
+        y_ticks_rotation: int | str = 'horizontal',
         x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
         color_map: Optional[str] = None
 ) -> None:
     """Plots a bar graph."""
     # Generate colors
-    colors = generate_colors(len(x_axis_data), color_map)
+    colors = generate_colors(len(data), color_map)
 
     # Plot data
-    plt.bar(x_axis_data, y_axis_data, color=colors)
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
+    plt.bar(labels, data, color=colors)
+    plt.xlabel(labels_label)
+    plt.ylabel(data_label)
     plt.xticks(rotation=x_ticks_rotation)
     plt.yticks(rotation=y_ticks_rotation)
     plt.title(title)
@@ -75,23 +76,24 @@ def plot_bar_graph(
 
 
 def plot_barh_graph(
-        x_axis_data: list, y_axis_data: list,
-        x_label: str, y_label: str, title: str,
-        x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
+        data: list, labels: list,
+        data_label: str, labels_label: str, title: str,
+        x_ticks_rotation: int | str = 'horizontal',
+        y_ticks_rotation: int | str = 'horizontal',
         x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
         color_map: Optional[str] = None
 ) -> None:
     """Plots a horizontal bar graph."""
-    x_axis_data = x_axis_data[::-1]
-    y_axis_data = y_axis_data[::-1]
+    data = data[::-1]
+    labels = labels[::-1]
 
     # Generate colors
-    colors = generate_colors(len(y_axis_data), color_map)
+    colors = generate_colors(len(labels), color_map)
 
     # Plot data
-    plt.barh(y_axis_data, x_axis_data, color=colors)
-    plt.xlabel(x_label)
-    plt.ylabel(y_label)
+    plt.barh(labels, data, color=colors)
+    plt.xlabel(data_label)
+    plt.ylabel(labels_label)
     plt.xticks(rotation=x_ticks_rotation)
     plt.yticks(rotation=y_ticks_rotation)
     plt.title(title)
@@ -110,7 +112,8 @@ def plot_barh_graph(
 def plot_dot_plot(
         x_axis_data: list, y_axis_data: list, step: float,
         x_label: str, y_label: str, title: str,
-        x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
+        x_ticks_rotation: int | str = 'horizontal',
+        y_ticks_rotation: int | str = 'horizontal',
         x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
         color_map: Optional[str] = None
 ) -> None:
@@ -156,7 +159,8 @@ def plot_dot_plot(
 def plot_doth_plot(
         x_axis_data: list, y_axis_data: list, step: float,
         x_label: str, y_label: str, title: str,
-        x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
+        x_ticks_rotation: int | str = 'horizontal',
+        y_ticks_rotation: int | str = 'horizontal',
         x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
         color_map: Optional[str] = None
 ) -> None:
