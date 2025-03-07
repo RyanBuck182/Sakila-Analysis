@@ -8,13 +8,13 @@ import constants
 def all_queries(conn):
     """Perform all queries and their visualizations."""
     # Uncomment the following when the functions are implemented
-    # FIRST_QUERY_FUNCTION(conn)
+    revenue_by_store(conn)
     payment_per_rental(conn)
     # monthly_revenue(conn)
 
 
 def revenue_by_store(conn):
-    """4.1: DESCRIBE THE QUERY HERE."""
+    """4.1: Bar graph of revenue by store."""
     # Formulate query
     query = """
     SELECT c.city AS store, SUM(p.amount) AS revenue
@@ -30,13 +30,13 @@ def revenue_by_store(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    # CHANGE THE GRAPH TYPE AND SETTINGS
-    vis.plot_barh_graph(
-        data=data['placeholderColumnName'],
-        labels=data['placeholderColumnName'],
-        data_label='Placeholder X Label',
-        labels_label='Placeholder Y Label',
-        title='X.X Placeholder Title - Sakila',
+    vis.plot_bar_graph(
+        data=data['revenue'],
+        labels=data['store'],
+        data_label='Revenue',
+        labels_label='Store',
+        title='4.1 Revenue By Store - Sakila',
+        y_formatter="${x:.2f}",
     )
 
 
@@ -52,7 +52,6 @@ def payment_per_rental(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_box_plot(
         data=data['amount'],
         data_label='Payment Amount',
