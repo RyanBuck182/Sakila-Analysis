@@ -98,10 +98,10 @@ def THIRD_QUERY_FUNCTION(conn):
 
 if __name__ == "__main__":
     db_conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password = "toastysnail8561+",
-    database = "sakila"
+        host=constants.DB_HOST,
+        user=constants.DB_USER,
+        password=constants.DB_PASSWORD,
+        database=constants.DB_NAME
     )
 
     if db_conn.is_connected():
