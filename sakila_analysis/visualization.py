@@ -50,11 +50,19 @@ def plot_bar_graph(
         x_ticks_rotation: int | str = 'horizontal',
         y_ticks_rotation: int | str = 'horizontal',
         x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
-        color_map: Optional[str] = None
+        color_map: Optional[str] = None, color_gen: Optional[bool] = True,
+        fig_size: tuple[int, int] = None
 ) -> None:
     """Plots a bar graph."""
     # Generate colors
-    colors = generate_colors(len(data), color_map)
+    if color_gen:
+        colors = generate_colors(len(data), color_map)
+    else:
+        _viridis = cm.get_cmap('viridis')
+        colors = _viridis(np.linspace(0, 1, len(labels)))
+
+    if fig_size is not None:
+        plt.figure(figsize=fig_size)
 
     # Plot data
     plt.bar(labels, data, color=colors)

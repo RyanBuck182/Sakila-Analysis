@@ -7,7 +7,6 @@ import constants
 
 def all_queries(conn):
     """Perform all queries and their visualizations."""
-    # Uncomment the following when the functions are implemented
     revenue_by_store(conn)
     payment_per_rental(conn)
     monthly_revenue(conn)

@@ -8,38 +8,42 @@ import constants
 def all_queries(conn):
     """Perform all queries and their visualizations."""
     # Uncomment the following when the functions are implemented
-    # FIRST_QUERY_FUNCTION(conn)
-    # SECOND_QUERY_FUNCTION(conn)
-    # THIRD_QUERY_FUNCTION(conn)
+    rentals_per_actor(conn)
+    rentals_per_sports_actor(conn)
+    top_ten_actors_by_rentals(conn)
 
 
-def FIRST_QUERY_FUNCTION(conn):
+def rentals_per_actor(conn):
     """3.1: Gets every actor and their total rentals."""
     # Formulate query
     query = """
     SELECT first_name, last_name, COUNT(rental_id) as total_rentals
     FROM actor a
+    -- actor to film actor to inventory to rental
     JOIN film_actor fa ON a.actor_id = fa.actor_id
     JOIN inventory i ON i.film_id = fa.film_id
     JOIN rental r ON r.inventory_id = i.inventory_id
-    GROUP BY a.actor_id;
+    GROUP BY a.actor_id
+    LIMIT 50;
     """
 
     # Perform query on database and store result
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    # CHANGE THE GRAPH TYPE AND SETTINGS
-    vis.plot_barh_graph(
-        data=data['placeholderColumnName'],
-        labels=data['placeholderColumnName'],
-        data_label='Placeholder X Label',
-        labels_label='Placeholder Y Label',
-        title='X.X Placeholder Title - Sakila',
+    vis.plot_bar_graph(
+        data=data['total_rentals'],
+        labels=data['last_name'],
+        data_label='Total Rentals',
+        labels_label='Actor Name',
+        title='3.1 Total Rentals By Actor - Sakila',
+        x_ticks_rotation='vertical',
+        color_gen=False,
+        fig_size=(10, 6)
     )
 
 
-def SECOND_QUERY_FUNCTION(conn):
+def rentals_per_sports_actor(conn):
     """3.2: Gets the rentals for every actor in sports."""
     # Formulate query
     query = """
@@ -51,24 +55,27 @@ def SECOND_QUERY_FUNCTION(conn):
     JOIN film_category fc ON fc.film_id = fa.film_id
     JOIN category c ON c.category_id = fc.category_id
     WHERE c.name = "Sports"
-    GROUP BY a.actor_id;
+    GROUP BY a.actor_id
+    LIMIT 45;
     """
 
     # Perform query on database and store result
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    # CHANGE THE GRAPH TYPE AND SETTINGS
-    vis.plot_barh_graph(
-        data=data['placeholderColumnName'],
-        labels=data['placeholderColumnName'],
-        data_label='Placeholder X Label',
-        labels_label='Placeholder Y Label',
-        title='X.X Placeholder Title - Sakila',
+    vis.plot_bar_graph(
+        data=data['total_rentals'],
+        labels=data['last_name'],
+        data_label='Total Rentals',
+        labels_label='Actor Name',
+        title='3.2 Total Rentals By Actor For Sports Films - Sakila',
+        x_ticks_rotation='vertical',
+        color_gen=False,
+        fig_size=(10, 6)
     )
 
 
-def THIRD_QUERY_FUNCTION(conn):
+def top_ten_actors_by_rentals(conn):
     """3.3: Gets the top 10 actors with most rentals."""
     # Formulate query
     query = """
@@ -86,13 +93,15 @@ def THIRD_QUERY_FUNCTION(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    # CHANGE THE GRAPH TYPE AND SETTINGS
-    vis.plot_barh_graph(
-        data=data['placeholderColumnName'],
-        labels=data['placeholderColumnName'],
-        data_label='Placeholder X Label',
-        labels_label='Placeholder Y Label',
-        title='X.X Placeholder Title - Sakila',
+    vis.plot_bar_graph(
+        data=data['total_rentals'],
+        labels=data['last_name'],
+        data_label='Total Rentals',
+        labels_label='Actor Name',
+        title='3.3 Top 10 Highest Rental Count - Sakila',
+        x_ticks_rotation=45,
+        color_gen=False,
+        fig_size=(10, 6)
     )
 
 
