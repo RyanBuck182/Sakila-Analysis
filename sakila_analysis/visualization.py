@@ -8,49 +8,44 @@ import matplotlib.cm as cm
 
 warnings.filterwarnings('ignore')
 
+DEFAULT_COLOR_MAP = 'viridis'
+DEFAULT_COLOR_MAP_GENERATIVE = 'turbo'
 
-def generate_colors(qualitative_data: list, color_map: str = 'turbo') -> dict:
-    """Generate a color dict based on the given data and a color map.
 
-    Basically you can use this to generate a unique color for every piece of
-    qualitative data. Qualitative data is stuff like the title of a film, the
-    name of an actor, a category, etc.
+def plot_pie_chart(
+        data: list, labels: list, title: str,
+        percents: bool = False,
+        color_map: str | None = None
+) -> None:
+    """Plots a pie chart."""
+    data = data[::-1]
+    labels = labels[::-1]
 
-    You can pass the returned color dict to a visualization function to set the
-    colors of the data in the chart.
-    """
-    shuffled_data = qualitative_data.copy()
-    random.shuffle(shuffled_data)
+    colors = generate_colors(len(labels), color_map)
 
-    viridis = cm.get_cmap(color_map)
-    colors = viridis(np.linspace(0, 1, len(shuffled_data)))
+    if percents:
+        plt.pie(data, labels=labels, colors=colors,
+                startangle=180, autopct='%1.2f%%',
+                pctdistance=0.75)
+    else:
+        plt.pie(data, labels=labels, colors=colors,
+                startangle=180)
 
-    color_dict = {}
-    for category, color in zip(shuffled_data, colors):
-        color_dict[category] = color
+    plt.title(title)
+    plt.tight_layout()
 
-    return color_dict
+    plt.show()
 
 
 def plot_bar_graph(
-        data: pd.DataFrame, x_axis: str, y_axis: str,
+        x_axis_data: list, y_axis_data: list,
         x_label: str, y_label: str,  title: str,
         x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
         x_formatter: str | None = None, y_formatter: str | None = None,
-        color_dict: dict | None = None
+        color_map: str | None = None
 ) -> None:
     """Plots a bar graph."""
-    x_axis_data = data[x_axis][::-1]
-    y_axis_data = data[y_axis][::-1]
-
-    # Use color dict if available, otherwise use viridis
-    if color_dict is None:
-        viridis = cm.get_cmap('viridis')
-        colors = viridis(np.linspace(0, 1, len(x_axis_data)))
-    else:
-        colors = []
-        for data_point in x_axis_data:
-            colors.append(color_dict[data_point])
+    colors = generate_colors(len(x_axis_data), color_map)
 
     plt.bar(x_axis_data, y_axis_data, color=colors)
     plt.xlabel(x_label)
@@ -70,24 +65,17 @@ def plot_bar_graph(
 
 
 def plot_barh_graph(
-        data: pd.DataFrame, x_axis: str, y_axis: str,
+        x_axis_data: list, y_axis_data: list,
         x_label: str, y_label: str, title: str,
         x_ticks_rotation: int | str = 'horizontal', y_ticks_rotation: int | str = 'horizontal',
         x_formatter: str | None = None, y_formatter: str | None = None,
-        color_dict: dict | None = None
+        color_map: str | None = None
 ) -> None:
     """Plots a horizontal bar graph."""
-    x_axis_data = data[x_axis][::-1]
-    y_axis_data = data[y_axis][::-1]
+    x_axis_data = x_axis_data[::-1]
+    y_axis_data = y_axis_data[::-1]
 
-    # Use color dict if available, otherwise use viridis
-    if color_dict is None:
-        viridis = cm.get_cmap('viridis')
-        colors = viridis(np.linspace(0, 1, len(y_axis_data)))
-    else:
-        colors = []
-        for data_point in y_axis_data:
-            colors.append(color_dict[data_point])
+    colors = generate_colors(len(y_axis_data), color_map)
 
     plt.barh(y_axis_data, x_axis_data, color=colors)
     plt.xlabel(x_label)
@@ -104,3 +92,18 @@ def plot_barh_graph(
         ax.yaxis.set_major_formatter(y_formatter)
 
     plt.show()
+
+
+def generate_colors(
+        color_count: int, color_map: str | None = None
+) -> list:
+    """Generate a bunch of colors from a given color map."""
+    if color_map is None:
+        color_map = DEFAULT_COLOR_MAP_GENERATIVE
+
+    cmap = cm.get_cmap(color_map)
+    colors = list(cmap(np.linspace(0, 1, color_count)))
+
+    random.shuffle(colors)
+
+    return colors

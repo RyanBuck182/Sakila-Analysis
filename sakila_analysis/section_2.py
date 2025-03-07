@@ -29,14 +29,11 @@ def rental_count_by_film_category(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalCount',
-        y_axis='name',
-        x_label='Rental Count',
-        y_label='Film Category',
+    vis.plot_pie_chart(
+        data=data['rentalCount'],
+        labels=data['name'],
         title='2.1 Rental Count By Film Category - Sakila',
-        color_dict=vis.generate_colors(data['name'])
+        percents=True
     )
 
 
@@ -57,14 +54,12 @@ def rental_rate_by_film_category(conn):
 
     # Visualize data
     vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalRate',
-        y_axis='name',
+        x_axis_data=data['rentalRate'],
+        y_axis_data=data['name'],
         x_label='Average Rental Cost Per Day',
         y_label='Film Category',
         title='2.2 Rental Cost By Film Category - Sakila',
         x_formatter="${x:.2f}",
-        color_dict=vis.generate_colors(data['name'])
     )
 
 
@@ -89,14 +84,12 @@ def most_rented_sports_films(conn):
 
     # Visualize data
     vis.plot_bar_graph(
-        data=data,
-        x_axis='title',
-        y_axis='rentalCount',
+        x_axis_data=data['title'],
+        y_axis_data=data['rentalCount'],
         x_label='Rental Count',
         y_label='Film Title',
         x_ticks_rotation=30,
         title='2.3 Top 5 Most Rented Sports Films - Sakila',
-        color_dict=vis.generate_colors(data['title'])
     )
 
 
