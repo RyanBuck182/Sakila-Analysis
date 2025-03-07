@@ -23,8 +23,10 @@ def plot_pie_chart(
     data = data[::-1]
     labels = labels[::-1]
 
+    # Generate colors
     colors = generate_colors(len(labels), color_map)
 
+    # Plot data
     _, _, plt_labels = plt.pie(
         data, labels=labels, colors=colors, startangle=180,
         pctdistance=0.75, autopct='%1.2f%%' if percents else '')
@@ -37,6 +39,7 @@ def plot_pie_chart(
         if background:
             label.set_bbox(dict(facecolor='white', edgecolor='black'))
 
+    # Display plot
     plt.tight_layout()
     plt.show()
 
@@ -49,8 +52,10 @@ def plot_bar_graph(
         color_map: Optional[str] = None
 ) -> None:
     """Plots a bar graph."""
+    # Generate colors
     colors = generate_colors(len(x_axis_data), color_map)
 
+    # Plot data
     plt.bar(x_axis_data, y_axis_data, color=colors)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
@@ -64,6 +69,7 @@ def plot_bar_graph(
     if y_formatter:
         ax.yaxis.set_major_formatter(y_formatter)
 
+    # Display plot
     plt.tight_layout()
     plt.show()
 
@@ -79,8 +85,10 @@ def plot_barh_graph(
     x_axis_data = x_axis_data[::-1]
     y_axis_data = y_axis_data[::-1]
 
+    # Generate colors
     colors = generate_colors(len(y_axis_data), color_map)
 
+    # Plot data
     plt.barh(y_axis_data, x_axis_data, color=colors)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
@@ -94,6 +102,7 @@ def plot_barh_graph(
     if y_formatter:
         ax.yaxis.set_major_formatter(y_formatter)
 
+    # Display plot
     plt.tight_layout()
     plt.show()
 
@@ -139,6 +148,7 @@ def plot_dot_plot(
     if y_formatter:
         ax.yaxis.set_major_formatter(y_formatter)
 
+    # Display plot
     plt.tight_layout()
     plt.show()
 
@@ -187,6 +197,7 @@ def plot_doth_plot(
     if y_formatter:
         ax.yaxis.set_major_formatter(y_formatter)
 
+    # Display plot
     plt.tight_layout()
     plt.show()
 
