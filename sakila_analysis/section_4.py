@@ -10,7 +10,7 @@ def all_queries(conn):
     # Uncomment the following when the functions are implemented
     revenue_by_store(conn)
     payment_per_rental(conn)
-    # monthly_revenue(conn)
+    monthly_revenue(conn)
 
 
 def revenue_by_store(conn):
@@ -36,7 +36,7 @@ def revenue_by_store(conn):
         data_label='Revenue',
         labels_label='Store',
         title='4.1 Revenue By Store - Sakila',
-        y_formatter="${x:.2f}",
+        y_formatter="${x:.0f}",
     )
 
 
@@ -56,12 +56,12 @@ def payment_per_rental(conn):
         data=data['amount'],
         data_label='Payment Amount',
         title='4.2 Rental Payment Amount - Sakila',
-        y_formatter="${x:.2f}",
+        y_formatter="${x:.0f}",
     )
 
 
 def monthly_revenue(conn):
-    """4.3: DESCRIBE THE QUERY HERE."""
+    """4.3: Line graph of revenue by month."""
     # Formulate query
     query = """
     SELECT MONTH(p.payment_date) AS month, SUM(p.amount) AS revenue
@@ -74,13 +74,14 @@ def monthly_revenue(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    # CHANGE THE GRAPH TYPE AND SETTINGS
-    vis.plot_barh_graph(
-        data=data['placeholderColumnName'],
-        labels=data['placeholderColumnName'],
-        data_label='Placeholder X Label',
-        labels_label='Placeholder Y Label',
-        title='X.X Placeholder Title - Sakila',
+    vis.plot_line_graph(
+        x_axis_data=data['month'],
+        y_axis_data=data['revenue'],
+        x_label='Month',
+        y_label='Revenue',
+        x_tick_labels=['', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug'],
+        title='4.3 Revenue By Month - Sakila',
+        y_formatter="${x:.0f}",
     )
 
 
