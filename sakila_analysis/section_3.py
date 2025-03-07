@@ -31,13 +31,11 @@ def FIRST_QUERY_FUNCTION(conn):
     # Visualize data
     # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalCount',
-        y_axis='name',
-        x_label='Rental Count',
-        y_label='Film Category',
-        title='2.1 Rental Count By Film Category - Sakila',
-        color_dict=vis.generate_colors(data['name'])
+        data=data['placeholderColumnName'],
+        labels=data['placeholderColumnName'],
+        data_label='Placeholder X Label',
+        labels_label='Placeholder Y Label',
+        title='X.X Placeholder Title - Sakila',
     )
 
 
@@ -62,14 +60,11 @@ def SECOND_QUERY_FUNCTION(conn):
     # Visualize data
     # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalRate',
-        y_axis='name',
-        x_label='Average Rental Cost Per Day',
-        y_label='Film Category',
-        title='2.2 Rental Cost By Film Category - Sakila',
-        x_formatter="${x:.2f}",
-        color_dict=vis.generate_colors(data['name'])
+        data=data['placeholderColumnName'],
+        labels=data['placeholderColumnName'],
+        data_label='Placeholder X Label',
+        labels_label='Placeholder Y Label',
+        title='X.X Placeholder Title - Sakila',
     )
 
 
@@ -93,13 +88,11 @@ def THIRD_QUERY_FUNCTION(conn):
     # Visualize data
     # CHANGE THE GRAPH TYPE AND SETTINGS
     vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalCount',
-        y_axis='title',
-        x_label='Rental Count',
-        y_label='Film Title',
-        title='2.3 Top 5 Most Rented Sports Films - Sakila',
-        color_dict=vis.generate_colors(data['title'])
+        data=data['placeholderColumnName'],
+        labels=data['placeholderColumnName'],
+        data_label='Placeholder X Label',
+        labels_label='Placeholder Y Label',
+        title='X.X Placeholder Title - Sakila',
     )
 
 

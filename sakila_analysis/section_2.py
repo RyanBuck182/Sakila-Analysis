@@ -1,4 +1,5 @@
 import mysql.connector
+import pandas
 import pandas as pd
 
 import visualization as vis
@@ -29,14 +30,11 @@ def rental_count_by_film_category(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalCount',
-        y_axis='name',
-        x_label='Rental Count',
-        y_label='Film Category',
+    vis.plot_pie_chart(
+        data=data['rentalCount'],
+        labels=data['name'],
         title='2.1 Rental Count By Film Category - Sakila',
-        color_dict=vis.generate_colors(data['name'])
+        background=True,
     )
 
 
@@ -56,15 +54,14 @@ def rental_rate_by_film_category(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalRate',
-        y_axis='name',
+    vis.plot_doth_plot(
+        x_axis_data=data['rentalRate'],
+        y_axis_data=data['name'],
+        step=0.025,
         x_label='Average Rental Cost Per Day',
         y_label='Film Category',
         title='2.2 Rental Cost By Film Category - Sakila',
         x_formatter="${x:.2f}",
-        color_dict=vis.generate_colors(data['name'])
     )
 
 
@@ -88,14 +85,13 @@ def most_rented_sports_films(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    vis.plot_barh_graph(
-        data=data,
-        x_axis='rentalCount',
-        y_axis='title',
-        x_label='Rental Count',
-        y_label='Film Title',
+    vis.plot_bar_graph(
+        data=data['rentalCount'],
+        labels=data['title'],
+        data_label='Rental Count',
+        labels_label='Film Title',
+        x_ticks_rotation=30,
         title='2.3 Top 5 Most Rented Sports Films - Sakila',
-        color_dict=vis.generate_colors(data['title'])
     )
 
 
