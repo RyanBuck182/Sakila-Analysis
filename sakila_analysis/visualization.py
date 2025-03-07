@@ -212,12 +212,41 @@ def plot_box_plot(
 ) -> None:
     """Plots a box plot."""
     # Plot data
-    bplot = plt.boxplot(data)  # tick_labels=labels
+    plt.boxplot(data)
     plt.xlabel(data_label)
     plt.xticks([])
     plt.title(title)
 
     ax = plt.gca()
+    if x_formatter:
+        ax.xaxis.set_major_formatter(x_formatter)
+    if y_formatter:
+        ax.yaxis.set_major_formatter(y_formatter)
+
+    # Display plot
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_line_graph(
+        x_axis_data: list, y_axis_data: list,
+        x_label: str, y_label: str,  title: str,
+        x_tick_labels: list[str] = None, y_tick_labels: list[str] = None,
+        x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
+) -> None:
+    """Plots a line graph."""
+    # Plot data
+    plt.plot(x_axis_data, y_axis_data)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.title(title)
+
+    ax = plt.gca()
+    if x_tick_labels is not None:
+        ax.set_xticklabels(x_tick_labels)
+    if y_tick_labels is not None:
+        ax.set_yticklabels(y_tick_labels)
+
     if x_formatter:
         ax.xaxis.set_major_formatter(x_formatter)
     if y_formatter:
