@@ -206,6 +206,28 @@ def plot_doth_plot(
     plt.show()
 
 
+def plot_box_plot(
+        data: list, data_label: str, title: str,
+        x_formatter: Optional[str] = None, y_formatter: Optional[str] = None,
+) -> None:
+    """Plots a box plot."""
+    # Plot data
+    bplot = plt.boxplot(data)  # tick_labels=labels
+    plt.xlabel(data_label)
+    plt.xticks([])
+    plt.title(title)
+
+    ax = plt.gca()
+    if x_formatter:
+        ax.xaxis.set_major_formatter(x_formatter)
+    if y_formatter:
+        ax.yaxis.set_major_formatter(y_formatter)
+
+    # Display plot
+    plt.tight_layout()
+    plt.show()
+
+
 def generate_colors(
         color_count: int, color_map: Optional[str] = None
 ) -> list:
