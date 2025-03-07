@@ -1,4 +1,5 @@
 import mysql.connector
+import pandas
 import pandas as pd
 
 import visualization as vis
@@ -33,7 +34,7 @@ def rental_count_by_film_category(conn):
         data=data['rentalCount'],
         labels=data['name'],
         title='2.1 Rental Count By Film Category - Sakila',
-        percents=True
+        background=True,
     )
 
 
@@ -53,9 +54,10 @@ def rental_rate_by_film_category(conn):
     data = pd.read_sql(query, conn)
 
     # Visualize data
-    vis.plot_barh_graph(
+    vis.plot_doth_plot(
         x_axis_data=data['rentalRate'],
         y_axis_data=data['name'],
+        step=0.025,
         x_label='Average Rental Cost Per Day',
         y_label='Film Category',
         title='2.2 Rental Cost By Film Category - Sakila',
