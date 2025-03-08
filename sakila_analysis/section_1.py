@@ -7,6 +7,7 @@ from matplotlib.colors import ListedColormap  #for the colour blind
 
 purple_gold = ListedColormap(["#800080", "#FFD700"])
 
+
 def all_queries(conn):
     """Execute all queries and visualize the results."""
     total_rentals_per_customer(conn)
@@ -75,6 +76,7 @@ def rental_counts_distribution(conn):
         title='Distribution of Rental Counts by Month - Sakila',
         color_map=purple_gold
     )
+
 
 if __name__ == "__main__":
     db_conn = mysql.connector.connect(
